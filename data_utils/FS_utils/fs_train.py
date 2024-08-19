@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """Implementation and improvement of the paper:
 Unsupervised learning and segmentation of complex activities from video.
 """
@@ -39,12 +37,18 @@ if __name__ == '__main__':
     # granularity level eval or high
     # opt.gr_lev = ''
     # set root
-    opt.dataset_root = '/home/sateesh/fs_data'
+    opt.dataset_root = r"C:\Users\Alan Wong\Desktop\TOT-CVPR22\fs_data"
     if not os.path.exists(opt.exp_root):
         os.mkdir(opt.exp_root)
 
     opt.tensorboard_dir = os.path.join(opt.exp_root, opt.description)
-    os.mkdir(opt.tensorboard_dir)   
+    
+    
+    # Example: Assuming opt.tensorboard_dir is already set
+    if not os.path.exists(opt.tensorboard_dir):
+        os.makedirs(opt.tensorboard_dir, exist_ok=True)
+    # Old
+    # os.mkdir(opt.tensorboard_dir)   
 
     # update log name and absolute paths
     #print("Value of load emb: {}".format(opt.load_embed_feat))

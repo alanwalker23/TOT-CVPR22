@@ -1,0 +1,66 @@
+Current problems:
+
+- readline --> pyreadline
+- ncurses (Linux only)
+- libuuid (Linux and MacOs)
+- libstdcxx-ng (Nothing)
+- libgfortran-ng (Nothing)
+- libgcc-ng (Nothing)
+- libedit (Nothing) --> m2-libedit?
+- dbus --> dbus-next or pymodbus (Currently trying dbus-next)
+
+
+Possible options for libuuid
+libuuid-amzn2-aarch64          2.30.2               5  pkgs/main
+libuuid-cos6-i686             2.17.2      hbd3d490_0  pkgs/main
+libuuid-cos6-x86_64           2.17.2               4  pkgs/main
+libuuid-cos6-x86_64           2.17.2      h22b9525_0  pkgs/main
+libuuid-cos6-x86_64           2.17.2    h9b0a68f_105  conda-forge
+libuuid-cos6-x86_64           2.17.2   h9b0a68f_1105  conda-forge
+libuuid-cos6-x86_64           2.17.2    h9d98e8f_104  conda-forge
+libuuid-cos6-x86_64           2.17.2   h9d98e8f_1104  conda-forge
+libuuid-cos6-x86_64           2.17.2    ha826a6f_103  conda-forge
+libuuid-cos6-x86_64           2.17.2   ha826a6f_1103  conda-forge
+libuuid-cos7-aarch64          2.23.2    h9b0a68f_105  conda-forge
+libuuid-cos7-aarch64          2.23.2   h9b0a68f_1105  conda-forge
+libuuid-cos7-aarch64          2.23.2    h9d98e8f_104  conda-forge
+libuuid-cos7-aarch64          2.23.2   h9d98e8f_1104  conda-forge
+libuuid-cos7-aarch64          2.23.2    ha826a6f_103  conda-forge
+libuuid-cos7-aarch64          2.23.2   ha826a6f_1103  conda-forge
+libuuid-cos7-ppc64le          2.23.2               0  pkgs/main
+libuuid-cos7-ppc64le          2.23.2    h9b0a68f_105  conda-forge
+libuuid-cos7-ppc64le          2.23.2   h9b0a68f_1105  conda-forge
+libuuid-cos7-ppc64le          2.23.2    h9d98e8f_104  conda-forge
+libuuid-cos7-ppc64le          2.23.2   h9d98e8f_1104  conda-forge
+libuuid-cos7-ppc64le          2.23.2    ha826a6f_103  conda-forge
+libuuid-cos7-ppc64le          2.23.2   ha826a6f_1103  conda-forge
+libuuid-cos7-s390x            2.23.2               2  pkgs/main
+libuuid-cos7-x86_64           2.23.2   h9b0a68f_1105  conda-forge
+libuuid-cos7-x86_64           2.23.2   h9d98e8f_1104  conda-forge
+libuuid-cos7-x86_64           2.23.2   ha826a6f_1103  conda-forge
+libuuid-devel-cos6-i686          2.17.2               0  pkgs/main
+libuuid-devel-cos6-x86_64          2.17.2               0  pkgs/main
+libuuid-devel-cos6-x86_64          2.17.2               4  pkgs/main
+libuuid-devel-cos6-x86_64          2.17.2    h9b0a68f_105  conda-forge
+libuuid-devel-cos6-x86_64          2.17.2   h9b0a68f_1105  conda-forge
+libuuid-devel-cos6-x86_64          2.17.2    h9d98e8f_104  conda-forge
+libuuid-devel-cos6-x86_64          2.17.2   h9d98e8f_1104  conda-forge
+libuuid-devel-cos6-x86_64          2.17.2    ha826a6f_103  conda-forge
+libuuid-devel-cos6-x86_64          2.17.2   ha826a6f_1103  conda-forge
+libuuid-devel-cos7-aarch64          2.23.2    h9b0a68f_105  conda-forge
+libuuid-devel-cos7-aarch64          2.23.2   h9b0a68f_1105  conda-forge
+libuuid-devel-cos7-aarch64          2.23.2    h9d98e8f_104  conda-forge
+libuuid-devel-cos7-aarch64          2.23.2   h9d98e8f_1104  conda-forge
+libuuid-devel-cos7-aarch64          2.23.2    ha826a6f_103  conda-forge
+libuuid-devel-cos7-aarch64          2.23.2   ha826a6f_1103  conda-forge
+libuuid-devel-cos7-ppc64le          2.23.2               0  pkgs/main
+libuuid-devel-cos7-ppc64le          2.23.2    h9b0a68f_105  conda-forge
+libuuid-devel-cos7-ppc64le          2.23.2   h9b0a68f_1105  conda-forge
+libuuid-devel-cos7-ppc64le          2.23.2    h9d98e8f_104  conda-forge
+libuuid-devel-cos7-ppc64le          2.23.2   h9d98e8f_1104  conda-forge
+libuuid-devel-cos7-ppc64le          2.23.2    ha826a6f_103  conda-forge
+libuuid-devel-cos7-ppc64le          2.23.2   ha826a6f_1103  conda-forge
+libuuid-devel-cos7-s390x          2.23.2               2  pkgs/main
+libuuid-devel-cos7-x86_64          2.23.2   h9b0a68f_1105  conda-forge
+libuuid-devel-cos7-x86_64          2.23.2   h9d98e8f_1104  conda-forge
+libuuid-devel-cos7-x86_64          2.23.2   ha826a6f_1103  conda-forge

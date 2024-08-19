@@ -1,0 +1,135 @@
+2024-08-19 13:32:55,426 - 10 - update_argpars.py - update - all: False
+2024-08-19 13:32:55,426 - 10 - update_argpars.py - update - apply_temporal_ot: False
+2024-08-19 13:32:55,427 - 10 - update_argpars.py - update - batch_size: 256
+2024-08-19 13:32:55,427 - 10 - update_argpars.py - update - bg: False
+2024-08-19 13:32:55,427 - 10 - update_argpars.py - update - bg_trh: 45
+2024-08-19 13:32:55,427 - 10 - update_argpars.py - update - data: C:\Users\Alan Wong\Desktop\TOT-CVPR22\fs_data\features
+2024-08-19 13:32:55,427 - 10 - update_argpars.py - update - data_type: 0
+2024-08-19 13:32:55,428 - 10 - update_argpars.py - update - dataset: fs
+2024-08-19 13:32:55,428 - 10 - update_argpars.py - update - dataset_root: C:\Users\Alan Wong\Desktop\TOT-CVPR22\fs_data
+2024-08-19 13:32:55,428 - 10 - update_argpars.py - update - description: bf_debug_4
+2024-08-19 13:32:55,428 - 10 - update_argpars.py - update - device: cpu
+2024-08-19 13:32:55,429 - 10 - update_argpars.py - update - embed_dim: 30
+2024-08-19 13:32:55,429 - 10 - update_argpars.py - update - epochs: 4000
+2024-08-19 13:32:55,429 - 10 - update_argpars.py - update - epsilon: 0.08
+2024-08-19 13:32:55,429 - 10 - update_argpars.py - update - exp_root: C:\Users\Alan Wong\Desktop\TOT-CVPR22\fs_data\output
+2024-08-19 13:32:55,429 - 10 - update_argpars.py - update - ext: txt
+2024-08-19 13:32:55,430 - 10 - update_argpars.py - update - f_norm: False
+2024-08-19 13:32:55,430 - 10 - update_argpars.py - update - feature_dim: 64
+2024-08-19 13:32:55,430 - 10 - update_argpars.py - update - frame_frequency: 1
+2024-08-19 13:32:55,430 - 10 - update_argpars.py - update - freeze_iters: 4000
+2024-08-19 13:32:55,430 - 10 - update_argpars.py - update - freeze_proto_loss: 0
+2024-08-19 13:32:55,431 - 10 - update_argpars.py - update - full: True
+2024-08-19 13:32:55,431 - 10 - update_argpars.py - update - global_K: 5
+2024-08-19 13:32:55,431 - 10 - update_argpars.py - update - global_k_prime: 0
+2024-08-19 13:32:55,431 - 10 - update_argpars.py - update - global_pipe: False
+2024-08-19 13:32:55,431 - 10 - update_argpars.py - update - gr_lev: 
+2024-08-19 13:32:55,432 - 10 - update_argpars.py - update - gt: C:\Users\Alan Wong\Desktop\TOT-CVPR22\fs_data\groundTruth
+2024-08-19 13:32:55,432 - 10 - update_argpars.py - update - learn_prototype: True
+2024-08-19 13:32:55,432 - 10 - update_argpars.py - update - load_embed_feat: False
+2024-08-19 13:32:55,432 - 10 - update_argpars.py - update - load_model: False
+2024-08-19 13:32:55,433 - 10 - update_argpars.py - update - loaded_model_name: test._rgb_!bg_dim30_ep2500_!nm_lr0.001_mlp_size0_.pth.tar
+2024-08-19 13:32:55,433 - 10 - update_argpars.py - update - local_dim: 200
+2024-08-19 13:32:55,433 - 10 - update_argpars.py - update - local_epoch: 200
+2024-08-19 13:32:55,433 - 10 - update_argpars.py - update - log: DEBUG
+2024-08-19 13:32:55,433 - 10 - update_argpars.py - update - log_str: test._all_!bg_dim30_ep4000_!nm_lr0.001_mlp_size0_
+2024-08-19 13:32:55,433 - 10 - update_argpars.py - update - lr: 0.001
+2024-08-19 13:32:55,434 - 10 - update_argpars.py - update - lr_adj: False
+2024-08-19 13:32:55,434 - 10 - update_argpars.py - update - mapping_dir: C:\Users\Alan Wong\Desktop\TOT-CVPR22\fs_data\mapping
+2024-08-19 13:32:55,434 - 10 - update_argpars.py - update - model: mlp
+2024-08-19 13:32:55,434 - 10 - update_argpars.py - update - model_name: mlp
+2024-08-19 13:32:55,435 - 10 - update_argpars.py - update - momentum: 0.9
+2024-08-19 13:32:55,435 - 10 - update_argpars.py - update - num_splits: 32
+2024-08-19 13:32:55,435 - 10 - update_argpars.py - update - num_videos: 2
+2024-08-19 13:32:55,435 - 10 - update_argpars.py - update - num_workers: 4
+2024-08-19 13:32:55,436 - 10 - update_argpars.py - update - output_dir: C:\Users\Alan Wong\Desktop\TOT-CVPR22\fs_data\output
+2024-08-19 13:32:55,436 - 10 - update_argpars.py - update - prefix: test.
+2024-08-19 13:32:55,436 - 10 - update_argpars.py - update - reduced: 0
+2024-08-19 13:32:55,436 - 10 - update_argpars.py - update - resume: True
+2024-08-19 13:32:55,437 - 10 - update_argpars.py - update - resume_segmentation: False
+2024-08-19 13:32:55,437 - 10 - update_argpars.py - update - save_embed_feat: False
+2024-08-19 13:32:55,437 - 10 - update_argpars.py - update - save_likelihood: False
+2024-08-19 13:32:55,437 - 10 - update_argpars.py - update - save_model: True
+2024-08-19 13:32:55,438 - 10 - update_argpars.py - update - seed: 0
+2024-08-19 13:32:55,438 - 10 - update_argpars.py - update - sigma: 1.5
+2024-08-19 13:32:55,438 - 10 - update_argpars.py - update - subaction: all
+2024-08-19 13:32:55,438 - 10 - update_argpars.py - update - tcn_loss: False
+2024-08-19 13:32:55,438 - 10 - update_argpars.py - update - temperature: 0.1
+2024-08-19 13:32:55,439 - 10 - update_argpars.py - update - tensorboard_dir: C:\Users\Alan Wong\Desktop\TOT-CVPR22\fs_data\output\bf_debug_4
+2024-08-19 13:32:55,439 - 10 - update_argpars.py - update - test_set: False
+2024-08-19 13:32:55,439 - 10 - update_argpars.py - update - time_loss: False
+2024-08-19 13:32:55,439 - 10 - update_argpars.py - update - vis: True
+2024-08-19 13:32:55,440 - 10 - update_argpars.py - update - vis_mode: segm
+2024-08-19 13:32:55,440 - 10 - update_argpars.py - update - weight_decay: 0.0001
+2024-08-19 13:32:55,440 - 10 - update_argpars.py - update - window_size: 30
+2024-08-19 13:32:55,440 - 10 - util_functions.py - update_opt_str - all: False
+2024-08-19 13:32:55,440 - 10 - util_functions.py - update_opt_str - apply_temporal_ot: False
+2024-08-19 13:32:55,440 - 10 - util_functions.py - update_opt_str - batch_size: 256
+2024-08-19 13:32:55,440 - 10 - util_functions.py - update_opt_str - bg: False
+2024-08-19 13:32:55,441 - 10 - util_functions.py - update_opt_str - bg_trh: 45
+2024-08-19 13:32:55,441 - 10 - util_functions.py - update_opt_str - data: C:\Users\Alan Wong\Desktop\TOT-CVPR22\fs_data\features
+2024-08-19 13:32:55,441 - 10 - util_functions.py - update_opt_str - data_type: 0
+2024-08-19 13:32:55,441 - 10 - util_functions.py - update_opt_str - dataset: fs
+2024-08-19 13:32:55,441 - 10 - util_functions.py - update_opt_str - dataset_root: C:\Users\Alan Wong\Desktop\TOT-CVPR22\fs_data
+2024-08-19 13:32:55,441 - 10 - util_functions.py - update_opt_str - description: bf_debug_4
+2024-08-19 13:32:55,441 - 10 - util_functions.py - update_opt_str - device: cpu
+2024-08-19 13:32:55,442 - 10 - util_functions.py - update_opt_str - embed_dim: 30
+2024-08-19 13:32:55,442 - 10 - util_functions.py - update_opt_str - epochs: 4000
+2024-08-19 13:32:55,442 - 10 - util_functions.py - update_opt_str - epsilon: 0.08
+2024-08-19 13:32:55,442 - 10 - util_functions.py - update_opt_str - exp_root: C:\Users\Alan Wong\Desktop\TOT-CVPR22\fs_data\output
+2024-08-19 13:32:55,442 - 10 - util_functions.py - update_opt_str - ext: txt
+2024-08-19 13:32:55,442 - 10 - util_functions.py - update_opt_str - f_norm: False
+2024-08-19 13:32:55,443 - 10 - util_functions.py - update_opt_str - feature_dim: 64
+2024-08-19 13:32:55,443 - 10 - util_functions.py - update_opt_str - frame_frequency: 1
+2024-08-19 13:32:55,443 - 10 - util_functions.py - update_opt_str - freeze_iters: 4000
+2024-08-19 13:32:55,443 - 10 - util_functions.py - update_opt_str - freeze_proto_loss: 0
+2024-08-19 13:32:55,443 - 10 - util_functions.py - update_opt_str - full: True
+2024-08-19 13:32:55,443 - 10 - util_functions.py - update_opt_str - global_K: 5
+2024-08-19 13:32:55,444 - 10 - util_functions.py - update_opt_str - global_k_prime: 0
+2024-08-19 13:32:55,444 - 10 - util_functions.py - update_opt_str - global_pipe: False
+2024-08-19 13:32:55,444 - 10 - util_functions.py - update_opt_str - gr_lev: 
+2024-08-19 13:32:55,444 - 10 - util_functions.py - update_opt_str - gt: C:\Users\Alan Wong\Desktop\TOT-CVPR22\fs_data\groundTruth
+2024-08-19 13:32:55,444 - 10 - util_functions.py - update_opt_str - learn_prototype: True
+2024-08-19 13:32:55,444 - 10 - util_functions.py - update_opt_str - load_embed_feat: False
+2024-08-19 13:32:55,445 - 10 - util_functions.py - update_opt_str - load_model: False
+2024-08-19 13:32:55,445 - 10 - util_functions.py - update_opt_str - loaded_model_name: test._rgb_!bg_dim30_ep2500_!nm_lr0.001_mlp_size0_.pth.tar
+2024-08-19 13:32:55,445 - 10 - util_functions.py - update_opt_str - local_dim: 200
+2024-08-19 13:32:55,445 - 10 - util_functions.py - update_opt_str - local_epoch: 200
+2024-08-19 13:32:55,445 - 10 - util_functions.py - update_opt_str - log: DEBUG
+2024-08-19 13:32:55,445 - 10 - util_functions.py - update_opt_str - log_str: test._rgb_!bg_dim30_ep4000_!nm_lr0.001_mlp_size0_
+2024-08-19 13:32:55,445 - 10 - util_functions.py - update_opt_str - lr: 0.001
+2024-08-19 13:32:55,446 - 10 - util_functions.py - update_opt_str - lr_adj: False
+2024-08-19 13:32:55,446 - 10 - util_functions.py - update_opt_str - mapping_dir: C:\Users\Alan Wong\Desktop\TOT-CVPR22\fs_data\mapping
+2024-08-19 13:32:55,446 - 10 - util_functions.py - update_opt_str - model: mlp
+2024-08-19 13:32:55,446 - 10 - util_functions.py - update_opt_str - model_name: mlp
+2024-08-19 13:32:55,446 - 10 - util_functions.py - update_opt_str - momentum: 0.9
+2024-08-19 13:32:55,446 - 10 - util_functions.py - update_opt_str - num_splits: 32
+2024-08-19 13:32:55,447 - 10 - util_functions.py - update_opt_str - num_videos: 2
+2024-08-19 13:32:55,447 - 10 - util_functions.py - update_opt_str - num_workers: 4
+2024-08-19 13:32:55,447 - 10 - util_functions.py - update_opt_str - output_dir: C:\Users\Alan Wong\Desktop\TOT-CVPR22\fs_data\output
+2024-08-19 13:32:55,447 - 10 - util_functions.py - update_opt_str - prefix: test.
+2024-08-19 13:32:55,447 - 10 - util_functions.py - update_opt_str - reduced: 0
+2024-08-19 13:32:55,447 - 10 - util_functions.py - update_opt_str - resume: True
+2024-08-19 13:32:55,447 - 10 - util_functions.py - update_opt_str - resume_segmentation: False
+2024-08-19 13:32:55,448 - 10 - util_functions.py - update_opt_str - save_embed_feat: False
+2024-08-19 13:32:55,448 - 10 - util_functions.py - update_opt_str - save_likelihood: False
+2024-08-19 13:32:55,448 - 10 - util_functions.py - update_opt_str - save_model: True
+2024-08-19 13:32:55,448 - 10 - util_functions.py - update_opt_str - seed: 0
+2024-08-19 13:32:55,448 - 10 - util_functions.py - update_opt_str - sigma: 1.5
+2024-08-19 13:32:55,448 - 10 - util_functions.py - update_opt_str - subaction: rgb
+2024-08-19 13:32:55,448 - 10 - util_functions.py - update_opt_str - tcn_loss: False
+2024-08-19 13:32:55,448 - 10 - util_functions.py - update_opt_str - temperature: 0.1
+2024-08-19 13:32:55,449 - 10 - util_functions.py - update_opt_str - tensorboard_dir: C:\Users\Alan Wong\Desktop\TOT-CVPR22\fs_data\output\bf_debug_4
+2024-08-19 13:32:55,449 - 10 - util_functions.py - update_opt_str - test_set: False
+2024-08-19 13:32:55,449 - 10 - util_functions.py - update_opt_str - time_loss: False
+2024-08-19 13:32:55,449 - 10 - util_functions.py - update_opt_str - vis: True
+2024-08-19 13:32:55,449 - 10 - util_functions.py - update_opt_str - vis_mode: segm
+2024-08-19 13:32:55,449 - 10 - util_functions.py - update_opt_str - weight_decay: 0.0001
+2024-08-19 13:32:55,450 - 10 - util_functions.py - update_opt_str - window_size: 30
+2024-08-19 13:32:55,450 - 10 - mapping.py - load_mapping - load or create mapping
+2024-08-19 13:32:55,453 - 10 - mapping.py - load_gt - successfully loaded
+2024-08-19 13:32:55,453 - 10 - util_functions.py - wrap - <function GroundTruth.load_gt at 0x000001B08DAC5620> took 2.993 ms ~ 0.000 min ~ 0.003 sec
+2024-08-19 13:32:55,485 - 10 - corpus.py - __init__ - rgb  subactions: 19
+2024-08-19 13:32:55,486 - 10 - corpus.py - _init_videos - .
+2024-08-19 13:32:55,486 - 10 - corpus.py - _init_videos - gt statistic: 0 videos Counter()
+2024-08-19 13:32:55,487 - 10 - corpus.py - _update_fg_mask - .

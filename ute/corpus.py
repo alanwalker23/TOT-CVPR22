@@ -73,20 +73,19 @@ class Corpus(object):
         dir_check(os.path.join(opt.output_dir, 'segmentation'))
         dir_check(os.path.join(opt.output_dir, 'likelihood'))
         self.vis = None  # visualization tool
-        
 
     def _init_videos(self):
-        #print("Init called")
+        # print("Init called")
         print("load emb value is: {}".format(self.opt.load_embed_feat))
         print(self.opt.data)
         logger.debug('.')
         gt_stat = Counter()
         for root, dirs, files in os.walk(self.opt.data):
-            #print(root)
+            # print(root)
             if not files:
                 continue
             for filename in files:
-                #print("HERE")
+                # print("HERE")
                 # pick only videos with certain complex action
                 # (ex: just concerning coffee)
                 if self._subaction in filename:
@@ -112,7 +111,7 @@ class Corpus(object):
                                       gt=self.gt_map.gt[gt_name],
                                       name=gt_name,
                                       start=start,
-                                      with_bg=self._with_bg, opt = self.opt)
+                                      with_bg=self._with_bg, opt=self.opt)
                     except AssertionError:
                         logger.debug('Assertion Error: %s' % gt_name)
                         continue
@@ -129,20 +128,27 @@ class Corpus(object):
 
                     if self.opt.feature_dim > 100:
                         if len(self._videos) % 20 == 0:
-                            logger.debug('loaded %d videos' % len(self._videos))
+                            logger.debug('loaded %d videos' %
+                                         len(self._videos))
 
         # update global range within the current collection for each video
         for video in self._videos:
             video.update_indexes(len(self._features))
-        logger.debug('gt statistic: %d videos ' % len(self._videos) + str(gt_stat))
+        logger.debug('gt statistic: %d videos ' %
+                     len(self._videos) + str(gt_stat))
         self._update_fg_mask()
 
     def _update_fg_mask(self):
         logger.debug('.')
+        if self._features is None:
+            raise ValueError(
+                "self._features is None. It must be initialized before calling _update_fg_mask().")
+        self._total_fg_mask = np.ones(len(self._features), dtype=bool)
         if self._with_bg:
             self._total_fg_mask = np.zeros(len(self._features), dtype=bool)
             for video in self._videos:
-                self._total_fg_mask[np.nonzero(video.global_range)[0][video.fg_mask]] = True
+                self._total_fg_mask[np.nonzero(video.global_range)[
+                    0][video.fg_mask]] = True
         else:
             self._total_fg_mask = np.ones(len(self._features), dtype=bool)
 
@@ -168,11 +174,12 @@ class Corpus(object):
         logger.debug('.')
 
         dataloader = load_reltime(videos=self._videos,
-                                  features=self._features, opt = self.opt)
-        
+                                  features=self._features, opt=self.opt)
+
         print("Learning Prototype: {}".format(self.opt.learn_prototype))
 
-        model, loss, tcn_loss, optimizer = mlp.create_model(num_clusters = self._K, opt = self.opt ,  learn_prototype = self.opt.learn_prototype)
+        model, loss, tcn_loss, optimizer = mlp.create_model(
+            num_clusters=self._K, opt=self.opt,  learn_prototype=self.opt.learn_prototype)
         if self.opt.load_model:
             model.load_state_dict(load_model())
             self._embedding = model
@@ -181,17 +188,16 @@ class Corpus(object):
                                        save=self.opt.save_model,
                                        model=model,
                                        loss=loss,
-                                       tcn_loss = tcn_loss,
-                                       learn_prototype = self.opt.learn_prototype,
+                                       tcn_loss=tcn_loss,
+                                       learn_prototype=self.opt.learn_prototype,
                                        optimizer=optimizer,
-                                       name=self.opt.model_name, opt = self.opt)
+                                       name=self.opt.model_name, opt=self.opt)
 
         self._embedding = self._embedding.cpu()
 
         unshuffled_dataloader = load_reltime(videos=self._videos,
-                                             features=self._features, mode = "test", opt = self.opt,
+                                             features=self._features, mode="test", opt=self.opt,
                                              shuffle=False)
-
 
         gt_relative_time = None
         relative_time = None
@@ -200,15 +206,17 @@ class Corpus(object):
                 if self._embedded_feat is None:
                     self._embedded_feat = batch_features
                 else:
-                    self._embedded_feat = torch.cat((self._embedded_feat, batch_features), 0)
+                    self._embedded_feat = torch.cat(
+                        (self._embedded_feat, batch_features), 0)
 
                 batch_gtreltime = batch_gtreltime.numpy().reshape((-1, 1))
-                gt_relative_time = join_data(gt_relative_time, batch_gtreltime, np.vstack)
+                gt_relative_time = join_data(
+                    gt_relative_time, batch_gtreltime, np.vstack)
 
-            #relative_time = self._embedding(self._embedded_feat.float())[0].detach().numpy().reshape((-1, 1))
-            
+            # relative_time = self._embedding(self._embedded_feat.float())[0].detach().numpy().reshape((-1, 1))
 
-            self._embedded_feat = self._embedding.embedded(self._embedded_feat.float()).detach().numpy()
+            self._embedded_feat = self._embedding.embedded(
+                self._embedded_feat.float()).detach().numpy()
             self._embedded_feat = np.squeeze(self._embedded_feat)
 
         # if opt.save_embed_feat:
@@ -221,12 +229,13 @@ class Corpus(object):
         return model
 
     def get_proto_likelihood(self, features, prototypes):
-        scores =  np.matmul(features, np.transpose(prototypes))
+        scores = np.matmul(features, np.transpose(prototypes))
         probs = softmax(scores/0.1)
         probs = np.clip(probs, 1e-30, 1)
 
-        #print(probs[0])
+        # print(probs[0])
         return np.log(probs)
+
     def generate_prototype_likelihood(self, model):
         prototypes = model.get_prototypes().cpu().numpy()
         for video_idx in range(len(self._videos)):
@@ -236,19 +245,16 @@ class Corpus(object):
             scores = None
             for video in self._videos:
                 scores = join_data(scores, video.get_likelihood(), np.vstack)
-            
-            bg_trh_score = np.sort(scores, axis=0)[int((self.opt.bg_trh / 100) * scores.shape[0])]
+
+            bg_trh_score = np.sort(scores, axis=0)[int(
+                (self.opt.bg_trh / 100) * scores.shape[0])]
             trh_set = []
             for action_idx in range(self._K):
                 trh_set.append(bg_trh_score[action_idx])
-            
+
             for video in self._videos:
                 video.valid_likelihood_update(trh_set)
-            
 
-
-
-    
     def _video_likelihood_grid_proto(self, video_idx, prototypes):
         video = self._videos[video_idx]
         if self.opt.load_embed_feat:
@@ -260,6 +266,7 @@ class Corpus(object):
             scores = score_matrix[:, subact]
 
             video.likelihood_update(subact, scores)
+
     @timing
     def _gaussians_fit(self):
         """ Fit GMM to video features.
@@ -322,17 +329,20 @@ class Corpus(object):
 
             with open("test_gmm.npy", "wb") as f:
                 np.save(f, np.sort(scores, axis=0))
-                bg_trh_score = np.sort(scores, axis=0)[int((self.opt.bg_trh / 100) * scores.shape[0])]
+                bg_trh_score = np.sort(scores, axis=0)[int(
+                    (self.opt.bg_trh / 100) * scores.shape[0])]
                 np.save(f, bg_trh_score)
                 bg_trh_set = []
                 for action_idx in range(self._K):
-                    
-                    new_bg_trh = self._gaussians[action_idx].mean_score - bg_trh_score[action_idx]
+
+                    new_bg_trh = self._gaussians[action_idx].mean_score - \
+                        bg_trh_score[action_idx]
                     if action_idx == 0:
                         np.save(f, self._gaussians[action_idx].mean_score)
                         np.save(f, new_bg_trh)
 
-                    self._gaussians[action_idx].update_trh(new_bg_trh=new_bg_trh, opt=self.opt)
+                    self._gaussians[action_idx].update_trh(
+                        new_bg_trh=new_bg_trh, opt=self.opt)
                     bg_trh_set.append(new_bg_trh)
 
                 logger.debug('new bg_trh: %s' % str(bg_trh_set))
@@ -360,17 +370,18 @@ class Corpus(object):
             video.save_likelihood()
 
     def get_proto_labels(self, embeddings, prototypes):
-   
+
         prob_scores = np.matmul(embeddings, np.transpose(prototypes))
-        assignments = np.argmax(prob_scores, axis = 1)
+        assignments = np.argmax(prob_scores, axis=1)
         assignments = (assignments)
         return assignments
 
     def compute_euclidean_dist_numpy(self, embeddings, prototypes):
-   
-        dists = -2 * np.dot(embeddings, prototypes.T) + np.sum(prototypes**2, axis = 1) +  np.sum(embeddings**2, axis = 1)[:, np.newaxis]
-        
-        #print(dists.shape)
+
+        dists = -2 * np.dot(embeddings, prototypes.T) + np.sum(prototypes **
+                                                               2, axis=1) + np.sum(embeddings**2, axis=1)[:, np.newaxis]
+
+        # print(dists.shape)
         return dists
 
     def cluster_prototype(self, model):
@@ -383,18 +394,20 @@ class Corpus(object):
             long_rt += list(video.temp)
         long_rt = np.array(long_rt)
 
-        
         logger.debug("Performing Prototype based clustering")
-        print("Shape of embeddings sent to Kmeans: {}".format(self._embedded_feat[self._total_fg_mask].shape))
-        cluster_labels_orig = self.get_proto_labels(self._embedded_feat[self._total_fg_mask], model.get_prototypes().cpu().numpy())
+        print("Shape of embeddings sent to Kmeans: {}".format(
+            self._embedded_feat[self._total_fg_mask].shape))
+        cluster_labels_orig = self.get_proto_labels(
+            self._embedded_feat[self._total_fg_mask], model.get_prototypes().cpu().numpy())
         cluster_labels = cluster_labels_orig.copy()
 
         print("Total unique clusters: {}".format(np.unique(cluster_labels)))
         time2label = {}
-        count_array = np.array(np.unique(cluster_labels_orig, return_counts=True)).T
+        count_array = np.array(
+            np.unique(cluster_labels_orig, return_counts=True)).T
         print("Counts of individual clusters: {}".format(count_array))
         for label in np.unique(cluster_labels):
-            
+
             cluster_mask = cluster_labels == label
             r_time = np.mean(long_rt[self._total_fg_mask][cluster_mask])
             time2label[r_time] = label
@@ -411,7 +424,8 @@ class Corpus(object):
         # use predefined by time order  for kmeans clustering
         labels_with_bg[self._total_fg_mask] = cluster_labels
 
-        logger.debug('Order of labels: %s %s' % (str(shuffle_labels), str(sorted(time2label))))
+        logger.debug('Order of labels: %s %s' %
+                     (str(shuffle_labels), str(sorted(time2label))))
         accuracy.predicted_labels = labels_with_bg
         accuracy.gt_labels = long_gt
         old_mof, total_fr = accuracy.mof()
@@ -429,9 +443,11 @@ class Corpus(object):
         # VISUALISATION
         if self.opt.vis and self.opt.vis_mode != 'segm':
             dot_path = ''
-         
-            self.vis = Visual(mode=self.opt.vis_mode, opt = self.opt, save=True, svg=False, saved_dots=dot_path)
-            self.vis.fit(self._embedded_feat[self._total_fg_mask], np.array(long_gt)[self._total_fg_mask], 'gt_', reset=False)
+
+            self.vis = Visual(mode=self.opt.vis_mode, opt=self.opt,
+                              save=True, svg=False, saved_dots=dot_path)
+            self.vis.fit(self._embedded_feat[self._total_fg_mask], np.array(
+                long_gt)[self._total_fg_mask], 'gt_', reset=False)
             self.vis.color(np.array(long_rt)[self._total_fg_mask], 'time_')
             self.vis.color(cluster_labels_orig, 'kmean')
         ########################################################################
@@ -444,19 +460,17 @@ class Corpus(object):
         for video in self._videos:
 
             video.segmentation['cl'] = (video._z, self._label2gt)
-            #save_video_assignments(video.name, video.segmentation, "Before Viterbi", self.opt.tensorboard_dir)
+            # save_video_assignments(video.name, video.segmentation, "Before Viterbi", self.opt.tensorboard_dir)
 
-    
     def clustering(self):
         logger.debug('.')
         np.random.seed(self.opt.seed)
 
         kmean = MiniBatchKMeans(n_clusters=self._K,
-                                 random_state=self.opt.seed,
-                                 batch_size=50)
+                                random_state=self.opt.seed,
+                                batch_size=50)
         print(self._embedded_feat.shape)
         kmean.fit(self._embedded_feat[self._total_fg_mask])
-        
 
         accuracy = Accuracy(self.opt)
         long_gt = []
@@ -485,7 +499,8 @@ class Corpus(object):
         # use predefined by time order  for kmeans clustering
         labels_with_bg[self._total_fg_mask] = kmeans_labels
 
-        logger.debug('Order of labels: %s %s' % (str(shuffle_labels), str(sorted(time2label))))
+        logger.debug('Order of labels: %s %s' %
+                     (str(shuffle_labels), str(sorted(time2label))))
         accuracy.predicted_labels = labels_with_bg
         accuracy.gt_labels = long_gt
         old_mof, total_fr = accuracy.mof()
@@ -503,8 +518,10 @@ class Corpus(object):
         # VISUALISATION
         if self.opt.vis and self.opt.vis_mode != 'segm':
             dot_path = ''
-            self.vis = Visual(mode=self.opt.vis_mode, opt = self.opt, save=True, svg=False, saved_dots=dot_path)
-            self.vis.fit(self._embedded_feat[self._total_fg_mask], np.array(long_gt)[self._total_fg_mask], 'gt_', reset=False)
+            self.vis = Visual(mode=self.opt.vis_mode, opt=self.opt,
+                              save=True, svg=False, saved_dots=dot_path)
+            self.vis.fit(self._embedded_feat[self._total_fg_mask], np.array(
+                long_gt)[self._total_fg_mask], 'gt_', reset=False)
             self.vis.color(np.array(long_rt)[self._total_fg_mask], 'time_')
             self.vis.color(kmean.labels_, 'kmean')
         ########################################################################
@@ -542,7 +559,6 @@ class Corpus(object):
         self._count_subact()
         logger.debug(str(self._subact_counter))
 
-
     def without_temp_emed(self):
         print("HEREEEEEE")
         logger.debug('No temporal embedding')
@@ -553,7 +569,7 @@ class Corpus(object):
         """Calculate metrics as well with previous correspondences between
         gt labels and output labels"""
 
-        #print("Called with Prefix: {}".format(prefix))
+        # print("Called with Prefix: {}".format(prefix))
         accuracy = Accuracy(self.opt)
         f1_score = F1Score(K=self._K, n_videos=len(self._videos))
         long_gt = []
@@ -586,7 +602,8 @@ class Corpus(object):
         acc_cur = accuracy.mof_val()
         logger.debug('%sAction: %s' % (prefix, self._subaction))
         logger.debug('%sMoF val: ' % prefix + str(acc_cur))
-        logger.debug('%sprevious dic -> MoF val: ' % prefix + str(float(old_mof) / total_fr))
+        logger.debug('%sprevious dic -> MoF val: ' %
+                     prefix + str(float(old_mof) / total_fr))
 
         accuracy.mof_classes()
         accuracy.iou_classes()
@@ -601,21 +618,20 @@ class Corpus(object):
         f1_score.f1()
 
         for key, val in f1_score.stat().items():
-            
-            
+
             self.return_stat[key] = val
-        
+
         for key, val in self.return_stat.items():
             print(key, val)
-
-
 
         for video in self._videos:
             video.segmentation[video.iter] = (video._z, self._label2gt)
             if prefix == "final":
-                save_video_assignments(video.name, video.segmentation, "After Viterbi", self.opt.tensorboard_dir)
+                save_video_assignments(
+                    video.name, video.segmentation, "After Viterbi", self.opt.tensorboard_dir)
             else:
-                save_video_assignments(video.name, video.segmentation, "Before Viterbi", self.opt.tensorboard_dir)
+                save_video_assignments(
+                    video.name, video.segmentation, "Before Viterbi", self.opt.tensorboard_dir)
         if self.opt.vis:
             ########################################################################
             # VISUALISATION
@@ -624,11 +640,14 @@ class Corpus(object):
                 long_pr = [self._label2gt[i] for i in long_pr]
 
                 if self.vis is None:
-                    self.vis = Visual(mode=self.opt.vis_mode, opt = self.opt, save=True, reduce=None)
-                    self.vis.fit(self._embedded_feat, long_pr, 'iter_%d' % self.iter)
+                    self.vis = Visual(mode=self.opt.vis_mode,
+                                      opt=self.opt, save=True, reduce=None)
+                    self.vis.fit(self._embedded_feat, long_pr,
+                                 'iter_%d' % self.iter)
                 else:
                     reset = prefix == 'final'
-                    self.vis.color(labels=np.array(long_pr)[self._total_fg_mask], prefix='iter_%d' % self.iter, reset=reset)
+                    self.vis.color(labels=np.array(long_pr)[
+                                   self._total_fg_mask], prefix='iter_%d' % self.iter, reset=reset)
             else:
                 ####################################################################
                 # visualisation of segmentation
@@ -640,11 +659,14 @@ class Corpus(object):
                             colors[label] = (0, 0, 0)
                         else:
                             # colors[label] = (np.random.rand(), np.random.rand(), np.random.rand())
-                            colors[label] = cmap(label_idx / len(np.unique(long_gt)))
+                            colors[label] = cmap(
+                                label_idx / len(np.unique(long_gt)))
 
                     dir_check(os.path.join(self.opt.tensorboard_dir, 'plots'))
-                    dir_check(os.path.join(self.opt.tensorboard_dir, 'plots', self.opt.subaction))
-                    fold_path = os.path.join(self.opt.tensorboard_dir, 'plots', self.opt.subaction, 'segmentation')
+                    dir_check(os.path.join(self.opt.tensorboard_dir,
+                              'plots', self.opt.subaction))
+                    fold_path = os.path.join(
+                        self.opt.tensorboard_dir, 'plots', self.opt.subaction, 'segmentation')
                     dir_check(fold_path)
                     for video in self._videos:
                         path = os.path.join(fold_path, video.name + '.png')
@@ -669,7 +691,5 @@ class Corpus(object):
         for video in self._videos:
             video_features = self._embedded_feat[video.global_range]
             feat_name = self.opt.resume_str + '_%s' % video.name
-            np.savetxt(ops.join(self.opt.data, 'embed', opt.subaction, feat_name), video_features)
-
-
-
+            np.savetxt(ops.join(self.opt.data, 'embed',
+                       opt.subaction, feat_name), video_features)
