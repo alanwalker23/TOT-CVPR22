@@ -23,7 +23,7 @@ if __name__ == '__main__':
     opt = parser.parse_args()
     opt.num_splits = 32
     # set root
-    opt.dataset_root = '/home/sateesh/bf_data'
+    opt.dataset_root = r"C:\Users\Alan Wong\Desktop\TOT-CVPR22\bf_data"
     
     
     if not os.path.exists(opt.exp_root):

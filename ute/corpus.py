@@ -107,6 +107,7 @@ class Corpus(object):
                         path = os.path.join(root, filename)
                     start = 0 if self._features is None else self._features.shape[0]
                     try:
+                        print(self.gt_map.gt.keys())
                         video = Video(path, K=self._K,
                                       gt=self.gt_map.gt[gt_name],
                                       name=gt_name,

@@ -17,9 +17,9 @@ parser = argparse.ArgumentParser()
 
 ###########################################
 # data
-# actions = ['coffee', 'cereals', 'tea', 'milk', 'juice', 'sandwich',
-#            'scrambledegg', 'friedegg', 'salat', 'pancake']  # bf
-actions = 'rgb'  # fs
+actions = ['coffee', 'cereals', 'tea', 'milk', 'juice', 'sandwich',
+           'scrambledegg', 'friedegg', 'salat', 'pancake']  # bf
+# actions = 'rgb'  # fs
 parser.add_argument('--subaction', default='all',
                     help='measure accuracy for different subactivities')
 parser.add_argument('--all', default=False, type=bool,
@@ -100,7 +100,7 @@ parser.add_argument('--freeze_proto_loss', default=0, type=int, help="Window siz
 parser.add_argument("--tcn_loss", default=False, type=bool, help="Train for TCN LOSS")
 parser.add_argument("--time_loss", default=False, type=bool, help="Train for Time")
 parser.add_argument("--apply_temporal_ot", default=False, type=bool, help="Add Gaussian Prior")
-parser.add_argument("--exp_root", default=r"C:\Users\Alan Wong\Desktop\TOT-CVPR22\fs_data\output")
+parser.add_argument("--exp_root", default=r"C:\Users\Alan Wong\Desktop\TOT-CVPR22\bf_data\output")
 parser.add_argument("--model", default="mlp", type=str)
 parser.add_argument("--num_splits", default=32, type=int)
 
